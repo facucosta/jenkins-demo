@@ -22,11 +22,10 @@ for i in {1..10}; do
     echo -n "Atempting to connect to NodeJS ($i/10)..."
     RESPONSE=`curl -i "$CONNECTION" 2> /dev/null`
     RESULT="$?"
-    echo "CONN: $CONN"
-    STATUS=`echo $CONN | grep HTTP | cut -d " " -f 2`
-    echo "STATUS: $STATUS"
-    echo "RES: $RES"
-    if [[ "$RES" == "0"  && "$STATUS" == "200" ]]; then
+    STATUS=`echo $RESPONSE | grep HTTP | cut -d " " -f 2`
+    echo "RESPONSE: $RESPONSE"
+    echo "STATUS: $STATUS - RESULT: $RESULT"
+    if [[ "$RESULT" == "0"  && "$STATUS" == "200" ]]; then
         WORKING=1
         break
         echo "OK"
