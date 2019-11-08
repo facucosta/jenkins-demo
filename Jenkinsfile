@@ -8,9 +8,16 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'ls -la'
-        sh 'ps aux'
-        sh 'pwd'
+        sh 'cd application && npm install'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'service start nginx'
+        sh 'service redis-server start'
+        sh 'nodejs ./application/index.js &'
+        sh './tests/run_test.sh'
       }
     }
   }
