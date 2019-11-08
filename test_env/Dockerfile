@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx curl && \
+    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx curl procps && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/*
 
