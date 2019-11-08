@@ -20,8 +20,8 @@ WORKING=0
 for i in {1..10}; do
     sleep 1
     echo "Atempting to connect to NodeJS ($i/10)..."
-    curl "$CONNECTION" &> /dev/null
-    if [ "$?" -eq "0" ]; then
+    STATUS=`curl -i localhost:8081 2> /dev/null | grep HTTP | cut -d " " -f 2`
+    if [[ "$?" == "0"  && "$STATUS" == "200" ]]; then
         WORKING=1
         break
     fi
