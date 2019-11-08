@@ -2,7 +2,6 @@ pipeline {
   agent {
     dockerfile {
       dir 'test_env'
-      label 'redis_app'
       additionalBuildArgs '--build-arg LISTEN_PORT=81'
     }
   }
