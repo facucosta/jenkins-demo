@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'cd application && ls -la && ps aux'
-        sh 'cat package.json'
+        sh 'cd application && cat package.json'
         sh 'cd application && npm install'
       }
     }
