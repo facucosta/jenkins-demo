@@ -13,17 +13,15 @@ fi
 
 CONNECTION="$SERVER:$PORT"
 
-sleep 20
-
 echo "Running tests to server $SERVER on port $PORT"
 
 WAITING=0
 WORKING=0
 for i in {1..10}; do
     sleep 1
-    echo "Atempting to connect to NodeJS ($i/10)..."
-    CONN=`curl -i localhost:8081 2> /dev/null`
-    RES="$?"
+    echo -n "Atempting to connect to NodeJS ($i/10)..."
+    RESPONSE=`curl -i localhost:8081 2> /dev/null`
+    RESULT="$?"
     echo "CONN: $CONN"
     STATUS=`echo $CONN | grep HTTP | cut -d " " -f 2`
     echo "STATUS: $STATUS"
@@ -31,7 +29,10 @@ for i in {1..10}; do
     if [[ "$RES" == "0"  && "$STATUS" == "200" ]]; then
         WORKING=1
         break
-    fi
+        echo "OK"
+    else
+        echo "Failed (Status: $STATUS, Result: $RESULT)"
+    fi 
 done
 
 if [ "$WORKING" -eq "0" ]; then

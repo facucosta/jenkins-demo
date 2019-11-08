@@ -7,12 +7,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/*
 
-USER testuser
-RUN mkdir /home/testuser/redis-app
-
 COPY env_config/nginx-redis-app-conf /etc/nginx/sites-available
 
-USER root
 ARG LISTEN_PORT=80
 RUN ln -s /etc/nginx/sites-available/nginx-redis-app-conf /etc/nginx/sites-enabled && \
     rm /etc/nginx/sites-enabled/default && \

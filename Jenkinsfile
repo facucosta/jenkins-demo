@@ -8,24 +8,15 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'cd application && ls -la && ps aux'
-        sh 'cd application && npm install'
-        sh 'cd application && ls -la && ps aux'
-        sh 'cd application && ls -la node_modules && ps aux'
-        sh 'cd application && cat package.json'
-        sh 'cd application && cat package-lock.json'
-        sh 'cd application'
+        sh 'cd jenkins && ./build_app.sh'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'service nginx start'
-        sh 'service redis-server start'
-        sh 'cd application && ls -la && ps aux'
-        sh 'nodejs ./application/index.js &'
-        sh './tests/run_test.sh localhost 80'
-        sh 'pkill -KILL nodejs'
+        sh './jenkins/setup_env.sh'
+        sh './jenkins/run_test.sh localhost 80'
+        sh './jenkins/kill_env.sh'
       }
     }
   }
