@@ -1,2 +1,2 @@
 #!/bin/bash
-npm install
+(cd application && npm install && ls -la && ls -la node_modules)
