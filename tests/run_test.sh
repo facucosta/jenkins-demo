@@ -20,8 +20,13 @@ WORKING=0
 for i in {1..10}; do
     sleep 1
     echo "Atempting to connect to NodeJS ($i/10)..."
-    STATUS=`curl -i localhost:8081 2> /dev/null | grep HTTP | cut -d " " -f 2`
-    if [[ "$?" == "0"  && "$STATUS" == "200" ]]; then
+    CONN=`curl -i localhost:8081 2> /dev/null`
+    RES="$?"
+    echo "CONN: $CONN"
+    STATUS=`echo $CONN | grep HTTP | cut -d " " -f 2`
+    echo "STATUS: $STATUS"
+    echo "RES: $RES"
+    if [[ "$RES" == "0"  && "$STATUS" == "200" ]]; then
         WORKING=1
         break
     fi
@@ -43,6 +48,7 @@ assert_get_from_queue() {
     EXPECT="$1"
     echo -n "Testing if queue returns $EXPECT..."
     RES=`curl "$CONNECTION" 2> /dev/null`
+    echo "RES: $RES"
     if [[ "$RES" != "$EXPECT" ]]; then
         echo "ERROR!: got $RES"
         exit 1
