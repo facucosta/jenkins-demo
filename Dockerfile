@@ -22,6 +22,5 @@ EXPOSE $LISTEN_PORT
 
 USER root
 WORKDIR /home/testuser/redis-app
-CMD service nginx start && \
-    service redis-server start && \
-    su testuser -c "nodejs ./index.js"
+CMD service redis-server start && \
+    nginx -g "daemon off;"
