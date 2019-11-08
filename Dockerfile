@@ -3,7 +3,7 @@ FROM debian:buster
 RUN useradd testuser -m
 
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx npm curl && \
+    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx npm curl procps && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/*
 
