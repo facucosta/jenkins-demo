@@ -8,7 +8,7 @@ if [ -z "$SERVER" ]; then
 fi
 
 if [ -z "$PORT" ]; then
-    PORT="5000"
+    PORT="80"
 fi
 
 CONNECTION="$SERVER:$PORT"
@@ -20,7 +20,7 @@ WORKING=0
 for i in {1..10}; do
     sleep 1
     echo -n "Atempting to connect to NodeJS ($i/10)..."
-    RESPONSE=`curl -i $CONNECTION 2> /dev/null`
+    RESPONSE=`curl -i "$CONNECTION" 2> /dev/null`
     RESULT="$?"
     echo "CONN: $CONN"
     STATUS=`echo $CONN | grep HTTP | cut -d " " -f 2`
