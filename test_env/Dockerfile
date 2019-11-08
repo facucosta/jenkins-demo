@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx curl procps && \
+    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx curl && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/*
 
@@ -13,10 +13,6 @@ RUN ln -s /etc/nginx/sites-available/nginx-redis-app-conf /etc/nginx/sites-enabl
     sed -i "s|listen 80;|listen $LISTEN_PORT;|g" /etc/nginx/sites-available/nginx-redis-app-conf
 
 EXPOSE $LISTEN_PORT
-EXPOSE 80
-EXPOSE 81
-EXPOSE 8080
-EXPOSE 8081
 
 CMD service redis-server start && \
     nginx -g "daemon off;"

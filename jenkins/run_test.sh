@@ -18,17 +18,17 @@ echo "Running tests to server $SERVER on port $PORT"
 WAITING=0
 WORKING=0
 for i in {1..10}; do
-    sleep 5
+    sleep 2
     echo -n "Atempting to connect to NodeJS ($i/10)..."
     RESPONSE=`curl -i "$CONNECTION" 2> /dev/null`
     RESULT="$?"
     STATUS=`echo $RESPONSE | grep HTTP | cut -d " " -f 2`
-    echo "RESPONSE: $RESPONSE"
-    echo "STATUS: $STATUS - RESULT: $RESULT"
+    #echo "RESPONSE: $RESPONSE"
+    #echo "STATUS: $STATUS - RESULT: $RESULT"
     if [[ "$RESULT" == "0"  && "$STATUS" == "200" ]]; then
         WORKING=1
-        break
         echo "OK"
+        break
     else
         echo "Failed (Status: $STATUS, Result: $RESULT)"
     fi 
@@ -49,10 +49,9 @@ send_to_queue() {
 assert_get_from_queue() {
     EXPECT="$1"
     echo -n "Testing if queue returns $EXPECT..."
-    RES=`curl "$CONNECTION" 2> /dev/null`
-    echo "RES: $RES"
-    if [[ "$RES" != "$EXPECT" ]]; then
-        echo "ERROR!: got $RES"
+    RESPONSE=`curl "$CONNECTION" 2> /dev/null`
+    if [[ "$RESPONSE" != "$EXPECT" ]]; then
+        echo "ERROR!: got $RESPONSE"
         exit 1
     fi
     echo "OK"
