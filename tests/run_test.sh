@@ -13,6 +13,8 @@ fi
 
 CONNECTION="$SERVER:$PORT"
 
+sleep 20
+
 echo "Running tests to server $SERVER on port $PORT"
 
 WAITING=0
