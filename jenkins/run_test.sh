@@ -18,7 +18,7 @@ echo "Running tests to server $SERVER on port $PORT"
 WAITING=0
 WORKING=0
 for i in {1..10}; do
-    sleep 1
+    sleep 5
     echo -n "Atempting to connect to NodeJS ($i/10)..."
     RESPONSE=`curl -i "$CONNECTION" 2> /dev/null`
     RESULT="$?"
