@@ -18,7 +18,7 @@ pipeline {
       steps {
         sh 'service nginx start'
         sh 'service redis-server start'
-        sh 'nodejs ./application/index.js &'
+        sh 'nodejs ./application/index.js'
         sh './tests/run_test.sh'
       }
     }
