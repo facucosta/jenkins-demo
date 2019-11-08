@@ -9,10 +9,10 @@ pipeline {
     stage('Build') {
       steps {
         sh 'cd application && ls -la && ps aux'
-        sh 'cd application && npm install express body-parser redis --save'
+        sh 'cd application && npm install'
         sh 'cd application && ls -la && ps aux'
-        sh 'cd application && cat package-lock.json'
         sh 'cd application && cat package.json'
+        sh 'cd application && cat package-lock.json'
         sh 'cd application'
       }
     }
