@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'debian:buster'
+      image 'redis_app'
       args '-p 5000:80'
     }
   }
