@@ -1,9 +1,7 @@
 FROM debian:buster
 
-RUN useradd testuser -m
-
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx npm curl procps && \
+    apt-get install -yqq --no-install-recommends npm nodejs redis-server nginx curl procps && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/*
 
@@ -16,6 +14,5 @@ RUN ln -s /etc/nginx/sites-available/nginx-redis-app-conf /etc/nginx/sites-enabl
 
 EXPOSE $LISTEN_PORT
 
-WORKDIR /home/testuser/redis-app
 CMD service redis-server start && \
     nginx -g "daemon off;"
