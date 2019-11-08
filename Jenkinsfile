@@ -1,8 +1,9 @@
 pipeline {
   agent {
-    docker {
-      image 'redis_app'
-      args '-p 5000:80'
+    dockerfile {
+      dir 'test_env'
+      label 'redis_app'
+      additionalBuildArgs '--build-arg LISTEN_PORT=81'
     }
   }
   stages {
@@ -15,7 +16,7 @@ pipeline {
     stage('Test') {
       steps {
         sh './jenkins/setup_env.sh'
-        sh './jenkins/run_test.sh localhost 80'
+        sh './jenkins/run_test.sh localhost 81'
         sh './jenkins/kill_env.sh'
       }
     }
