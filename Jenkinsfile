@@ -14,7 +14,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh './tests/run_test.sh'
+        sh './tests/run_test.sh localhost 80'
       }
     }
 
