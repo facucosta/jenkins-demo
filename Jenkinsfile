@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       dir 'test_env'
-      additionalBuildArgs '--build-arg LISTEN_PORT=81'
+      additionalBuildArgs '--build-arg LISTEN_PORT=80'
     }
   }
   stages {
@@ -15,7 +15,7 @@ pipeline {
     stage('Test') {
       steps {
         sh './jenkins/setup_env.sh'
-        sh './jenkins/run_test.sh localhost 81'
+        sh './jenkins/run_test.sh localhost 80'
         sh './jenkins/kill_env.sh'
       }
     }

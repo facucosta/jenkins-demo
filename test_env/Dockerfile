@@ -16,7 +16,6 @@ RUN ln -s /etc/nginx/sites-available/nginx-redis-app-conf /etc/nginx/sites-enabl
 
 EXPOSE $LISTEN_PORT
 
-USER root
 WORKDIR /home/testuser/redis-app
 CMD service redis-server start && \
     nginx -g "daemon off;"
