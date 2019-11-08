@@ -15,7 +15,7 @@ pipeline {
     stage('Test') {
       steps {
         sh './jenkins/setup_env.sh'
-        sh './jenkins/run_test.sh localhost 8081'
+        sh './jenkins/run_test.sh localhost 81'
         sh './jenkins/kill_env.sh'
       }
     }
