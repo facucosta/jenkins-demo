@@ -1,16 +1,17 @@
 pipeline {
   agent {
     docker {
-      image 'redis_app'
+      image 'debian:buster'
       args '-p 5000:80'
     }
   }
   stages {
-    stage('Test') {
+    stage('Build') {
       steps {
         sh 'ls -la'
+        sh 'ps aux'
+        sh 'pwd'
       }
     }
-
   }
 }
